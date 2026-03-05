@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Helpdesk Ticket Portal</title>
+
+<style>
+
+body{
+font-family:Segoe UI;
+background:#f2f4f8;
+}
+
+.container{
+width:450px;
+margin:auto;
+margin-top:80px;
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+input,textarea,select{
+width:100%;
+padding:10px;
+margin-top:10px;
+}
+
+button{
+background:#2d6cdf;
+color:white;
+border:none;
+padding:10px;
+margin-top:15px;
+cursor:pointer;
+width:100%;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Raise Support Ticket</h2>
+
+<form id="ticketForm">
+
+<input type="text" id="name" placeholder="Name" required>
+
+<input type="email" id="email" placeholder="Mail ID" required>
+
+<textarea id="issue" placeholder="Describe Issue"></textarea>
+
+<textarea id="remarks" placeholder="Remarks"></textarea>
+
+<select id="priority">
+
+<option>Low</option>
+<option>Medium</option>
+<option>High</option>
+
+</select>
+
+<button type="submit">Create Ticket</button>
+
+</form>
+
+<p id="result"></p>
+
+</div>
+
+<script>
+
+const API="https://script.google.com/macros/s/AKfycbwAaJoI9l-wBeq-jb6wa0u5dSHbzlpAzPrZflzre1wHo6nydkp1_ZtX7VZVg1Wt5bji/exec"
+
+document.getElementById("ticketForm").addEventListener("submit",function(e){
+
+e.preventDefault()
+
+fetch(API,{
+method:"POST",
+body:JSON.stringify({
+name:name.value,
+email:email.value,
+issue:issue.value,
+remarks:remarks.value,
+priority:priority.value
+})
+})
+
+.then(res=>res.json())
+.then(data=>{
+
+result.innerHTML="Ticket Created: "+data.ticketId
+
+})
+
+})
+
+</script>
+
+</body>
+</html>

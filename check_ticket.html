@@ -1,0 +1,31 @@
+<input id="ticket" placeholder="Enter Ticket ID">
+
+<button onclick="check()">Check Status</button>
+
+<div id="result"></div>
+
+<script>
+
+const API = "https://script.google.com/macros/s/AKfycbwAaJoI9l-wBeq-jb6wa0u5dSHbzlpAzPrZflzre1wHo6nydkp1_ZtX7VZVg1Wt5bji/exec"
+
+function check(){
+
+const id = document.getElementById("ticket").value
+
+fetch(API + "?ticket=" + id)
+
+.then(res => res.json())
+
+.then(data => {
+
+document.getElementById("result").innerHTML =
+
+"Ticket ID: " + data[0] + "<br>" +
+"Status: " + data[7] + "<br>" +
+"Priority: " + data[6]
+
+})
+
+}
+
+</script>
